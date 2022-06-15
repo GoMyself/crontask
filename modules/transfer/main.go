@@ -317,6 +317,14 @@ func transferAg(uid, parentUid, parentName, topUid, topName, oldParentUid, oldPa
 		return err
 	}
 
+	query, _, _ = dialect.Update("tbl_member_rebate_info").Set(g.Record{"parent_uid": parentUid}).Where(g.Ex{"uid": uid}).ToSQL()
+	_, err = tx.Exec(query)
+	if err != nil {
+		fmt.Printf("query : %s \n error : %s \n", query, err.Error())
+		_ = tx.Rollback()
+		return err
+	}
+
 	_ = tx.Commit()
 
 	// 记录转代日志
