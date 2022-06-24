@@ -111,7 +111,7 @@ func processVIP(mb common.Member, mtp map[string]mValidBetAmount) error {
 			common.Log("upgrade", "会员名: %s VIP[%d],累计投注: %s, 升级累计投注: %s, 累计存款: %s, 升级累计存款: %s\n",
 				mb.Username, level, fmValidBet.String(), fnuBet.String(), fmValidDeposit.String(), fnuDeposit.String())
 			common.Log("upgrade", "会员名: %s升级\n", mb.Username)
-			membersUpgrade(m, level)
+			membersUpgrade(m, level, mb.Tester)
 		} else {
 			return nil
 		}
@@ -121,7 +121,7 @@ func processVIP(mb common.Member, mtp map[string]mValidBetAmount) error {
 }
 
 // 会员升级
-func membersUpgrade(m mWaterFlow, level int) {
+func membersUpgrade(m mWaterFlow, level int, tester string) {
 
 	fmt.Printf("up name:%s,vip%d,index:%d\n", m.Username, level, i)
 	i++
@@ -187,6 +187,7 @@ func membersUpgrade(m mWaterFlow, level int) {
 		"review_uid":  "0",
 		"review_name": "taskUpgrade",
 		"state":       common.DividendReviewPass,
+		"tester":      tester,
 	}
 
 	tx, err := db.Begin()
