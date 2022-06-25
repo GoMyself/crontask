@@ -20,7 +20,7 @@ func messageSend(msgID, title, subTitle, content, sendName, prefix string, isTop
 		"is_vip":     isVip,
 		"is_read":    0,
 		"is_delete":  0,
-		"send_at":    time.Now().UnixMicro(),
+		"send_at":    time.Now().Unix(),
 		"ty":         ty,
 	}
 	var records []g.Record
