@@ -12,16 +12,14 @@ import (
 )
 
 var (
-	db       *sqlx.DB
-	zlog     *fluent.Fluent
-	esPrefix string
-	dialect  = g.Dialect("mysql")
+	db      *sqlx.DB
+	zlog    *fluent.Fluent
+	dialect = g.Dialect("mysql")
 )
 
 func Parse(endpoints []string, path string) {
 
 	conf := common.ConfParse(endpoints, path)
-	esPrefix = conf.EsPrefix
 	// 初始化db
 	db = conn.InitDB(conf.Db.Master.Addr, conf.Db.Master.MaxIdleConn, conf.Db.Master.MaxIdleConn)
 
