@@ -3,9 +3,6 @@ package main
 import (
 	"cronTask/modules/captcha"
 	"cronTask/modules/deposit"
-	"cronTask/modules/event"
-	"cronTask/modules/promo"
-	"cronTask/modules/reports"
 	"cronTask/modules/transfer"
 	"cronTask/modules/upgrade"
 	"cronTask/modules/withdraw"
@@ -25,11 +22,8 @@ var (
 type fnP func([]string, string, string)
 
 var cbP = map[string]fnP{
-	"event":   event.Parse,   // 热门赛事 抓取
 	"upgrade": upgrade.Parse, //会员升/保/降级
 	"captcha": captcha.Parse, //验证码
-	"report":  reports.Parse, //报表计算
-	"promo":   promo.Parse,   //活动流水更新
 }
 
 type fn func([]string, string)
