@@ -20,6 +20,7 @@ var (
 	db       *sqlx.DB
 	td       *sqlx.DB
 	reportDb *sqlx.DB
+	tiDb     *sqlx.DB
 	cli      *redis.ClusterClient
 	prefix   string
 	loc      *time.Location
@@ -65,6 +66,8 @@ func Parse(endpoints []string, path, usernames string) {
 	// 初始化db
 	db = conn.InitDB(conf.Db.Master.Addr, conf.Db.Master.MaxIdleConn, conf.Db.Master.MaxIdleConn)
 	reportDb = conn.InitDB(conf.Db.Report.Addr, conf.Db.Report.MaxIdleConn, conf.Db.Report.MaxIdleConn)
+	tiDb = conn.InitDB(conf.Db.Tidb.Addr, conf.Db.Tidb.MaxIdleConn, conf.Db.Tidb.MaxOpenConn)
+
 	// 初始化redis
 	cli = conn.InitRedisCluster(conf.Redis.Addr, conf.Redis.Password)
 	// 初始化td
@@ -132,6 +135,9 @@ func levelTask(names []string, repair bool) {
 	common.Log("upgrade", "升降级完成，耗时 ： %v", time.Since(tm))
 
 	// todo 发送处理完通知
+
+	//统计各等级会员数。并修改 tbl_member_level
+	updateMemberLevel()
 }
 
 func process() {
