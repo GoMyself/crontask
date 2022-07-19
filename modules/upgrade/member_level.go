@@ -28,9 +28,9 @@ func updateMemberLevel() {
 			record := g.Record{
 				"user_count": v.UserCount,
 			}
-			query, _, _ := dialect.Update("tbl_admin_group").Set(record).Where(g.Ex{"level": v.Level, "prefix": v.Prefix}).ToSQL()
+			query, _, _ := dialect.Update("tbl_member_level").Set(record).Where(g.Ex{"level": v.Level, "prefix": v.Prefix}).ToSQL()
 			fmt.Println(query)
-			_, err = tiDb.Exec(query)
+			_, err = db.Exec(query)
 			if err != nil {
 				common.Log("updateMemberLevel", "error : %v", err)
 			}
