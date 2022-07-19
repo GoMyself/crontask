@@ -7,7 +7,6 @@ import (
 type Conf struct {
 	Lang         string `json:"lang"`
 	Prefix       string `json:"prefix"`
-	EsPrefix     string `json:"es_prefix"`
 	PullPrefix   string `json:"pull_prefix"`
 	IsDev        bool   `json:"is_dev"`
 	Sock5        string `json:"sock5"`
@@ -40,6 +39,11 @@ type Conf struct {
 			MaxIdleConn int    `json:"max_idle_conn"`
 			MaxOpenConn int    `json:"max_open_conn"`
 		} `json:"bet"`
+		Tidb struct {
+			Addr        string `json:"addr"`
+			MaxIdleConn int    `json:"max_idle_conn"`
+			MaxOpenConn int    `json:"max_open_conn"`
+		} `json:"tidb"`
 	} `json:"db"`
 	Td struct {
 		Addr        string `json:"addr"`
@@ -59,11 +63,6 @@ type Conf struct {
 		UseSSL          bool   `json:"useSSL"`
 		UploadURL       string `json:"uploadUrl"`
 	} `json:"minio"`
-	Es struct {
-		Host     []string `json:"host"`
-		Username string   `json:"username"`
-		Password string   `json:"password"`
-	} `json:"es"`
 	Port struct {
 		Game     string `json:"game"`
 		Member   string `json:"member"`
