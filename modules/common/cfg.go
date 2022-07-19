@@ -39,6 +39,11 @@ type Conf struct {
 			MaxIdleConn int    `json:"max_idle_conn"`
 			MaxOpenConn int    `json:"max_open_conn"`
 		} `json:"bet"`
+		Tidb struct {
+			Addr        string `json:"addr"`
+			MaxIdleConn int    `json:"max_idle_conn"`
+			MaxOpenConn int    `json:"max_open_conn"`
+		} `json:"tidb"`
 	} `json:"db"`
 	Td struct {
 		Addr        string `json:"addr"`
