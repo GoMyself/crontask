@@ -3,6 +3,7 @@ package main
 import (
 	"cronTask/modules/captcha"
 	"cronTask/modules/deposit"
+	"cronTask/modules/link"
 	"cronTask/modules/transfer"
 	"cronTask/modules/upgrade"
 	"cronTask/modules/withdraw"
@@ -32,6 +33,7 @@ var cb = map[string]fn{
 	"deposit":  deposit.Parse,  //删除未付款订单
 	"withdraw": withdraw.Parse, //更新提现（代付）失败订单的状态
 	"transfer": transfer.Parse, //团队转代处理脚本
+	"link":     link.Parse,     //修复td表的link
 }
 
 func main() {
