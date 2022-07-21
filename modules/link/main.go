@@ -42,12 +42,15 @@ type Link_t struct {
 func Parse(endpoints []string, path string) {
 
 	conf := common.ConfParse(endpoints, path)
-	fmt.Println(conf)
+	fmt.Println(conf.Db.Master.Addr)
+	fmt.Println(conf.Td.Addr)
+
 	prefix = conf.Prefix
 	indexUrl = conf.IndexUrl
 	// 初始化db
 	db = conn.InitDB(conf.Db.Master.Addr, conf.Db.Master.MaxIdleConn, conf.Db.Master.MaxIdleConn)
 	td = conn.InitDB(conf.Td.Addr, conf.Td.MaxIdleConn, conf.Td.MaxIdleConn)
+	common.InitTD(td)
 
 	updateLink()
 }
