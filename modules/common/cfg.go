@@ -12,6 +12,7 @@ type Conf struct {
 	Sock5        string `json:"sock5"`
 	RPC          string `json:"rpc"`
 	Fcallback    string `json:"fcallback"`
+	IndexUrl     string `json:"index_url"`
 	AutoPayLimit string `json:"autoPayLimit"`
 	Nats         struct {
 		Servers  []string `json:"servers"`
@@ -44,6 +45,11 @@ type Conf struct {
 			MaxIdleConn int    `json:"max_idle_conn"`
 			MaxOpenConn int    `json:"max_open_conn"`
 		} `json:"tidb"`
+		Td struct {
+			Addr        string `json:"addr"`
+			MaxIdleConn int    `json:"max_idle_conn"`
+			MaxOpenConn int    `json:"max_open_conn"`
+		} `json:"td"`
 	} `json:"db"`
 	Td struct {
 		Addr        string `json:"addr"`
