@@ -49,7 +49,7 @@ func Parse(endpoints []string, path string) {
 	indexUrl = conf.IndexUrl
 	// 初始化db
 	db = conn.InitDB(conf.Db.Master.Addr, conf.Db.Master.MaxIdleConn, conf.Db.Master.MaxIdleConn)
-	td = conn.InitDB(conf.Td.Addr, conf.Td.MaxIdleConn, conf.Td.MaxIdleConn)
+	td = conn.InitTD(conf.Td.Addr, conf.Td.MaxIdleConn, conf.Td.MaxIdleConn)
 	common.InitTD(td)
 
 	updateLink()
