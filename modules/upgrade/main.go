@@ -71,7 +71,7 @@ func Parse(endpoints []string, path, usernames string) {
 	// 初始化redis
 	cli = conn.InitRedisCluster(conf.Redis.Addr, conf.Redis.Password)
 	// 初始化td
-	td = conn.InitTD(conf.Td.Addr, conf.Td.MaxIdleConn, conf.Td.MaxOpenConn)
+	td = conn.InitTD(conf.Td.Log.Addr, conf.Td.Log.MaxIdleConn, conf.Td.Log.MaxOpenConn)
 	common.InitTD(td)
 
 	var names []string

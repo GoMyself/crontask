@@ -52,9 +52,11 @@ type Conf struct {
 		} `json:"td"`
 	} `json:"db"`
 	Td struct {
-		Addr        string `json:"addr"`
-		MaxIdleConn int    `json:"max_idle_conn"`
-		MaxOpenConn int    `json:"max_open_conn"`
+		Log struct {
+			Addr        string `json:"addr"`
+			MaxIdleConn int    `json:"max_idle_conn"`
+			MaxOpenConn int    `json:"max_open_conn"`
+		} `json:"log"`
 	} `json:"td"`
 	Redis struct {
 		Addr     []string `json:"addr"`
@@ -69,13 +71,6 @@ type Conf struct {
 		UseSSL          bool   `json:"useSSL"`
 		UploadURL       string `json:"uploadUrl"`
 	} `json:"minio"`
-	Port struct {
-		Game     string `json:"game"`
-		Member   string `json:"member"`
-		Promo    string `json:"promo"`
-		Merchant string `json:"merchant"`
-		Finance  string `json:"finance"`
-	} `json:"port"`
 }
 
 func ConfParse(endpoints []string, path string) Conf {
@@ -87,32 +82,4 @@ func ConfParse(endpoints []string, path string) Conf {
 	apollo.Close()
 
 	return cfg
-}
-
-func ConfReportParse(endpoints []string, path string) Conf {
-
-	cfg := Conf{}
-
-	apollo.New(endpoints)
-	apollo.Parse(path, &cfg)
-	apollo.Close()
-
-	return cfg
-}
-
-func ConfPlatParse(endpoints []string, path string) (Conf, map[string]map[string]interface{}, error) {
-
-	cfg := Conf{}
-	platCfg := map[string]map[string]interface{}{}
-
-	apollo.New(endpoints)
-	apollo.Parse(path, &cfg)
-	platCfg, err := apollo.ParseToml("/platform.toml", true)
-	if err != nil {
-		return cfg, platCfg, err
-	}
-
-	apollo.Close()
-
-	return cfg, platCfg, nil
 }
