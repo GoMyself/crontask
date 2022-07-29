@@ -285,7 +285,7 @@ func membersUpgrade(m mWaterFlow, level int, tester string) {
 
 	title := "Thông Báo Khuyến Mãi Thăng Cấp VIP"
 	content := fmt.Sprintf("Quý Khách Của P3 Thân Mến :\n    Chúc Mừng Bạn Đã Thăng Cấp VIP: %d !, Khuyến Mãi Thăng Cấp Đã Được Tặng Vào Tài Khoản Của Bạn,Vui Lòng Kiểm Tra Ngay ,Nếu Bạn Có Bất Cứ Thắc Mắc Vấn Đề Gì  Vui Lòng Liên Hệ CSKH Để Biết Thêm Chi Tiết .【P3】Chúc Bạn Thăng Cấp Mạnh Mẽ.", level+1)
-	err = messageSend("0", title, "", content, "system", prefix, 0, 0, 1, []string{m.Username})
+	err = messageSend("0", title, content, "system", prefix, 0, 0, 1, []string{m.Username})
 	if err != nil {
 		common.Log("upgrade", "error : %v", err)
 	}

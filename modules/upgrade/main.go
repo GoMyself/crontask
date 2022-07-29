@@ -18,6 +18,7 @@ import (
 // 全局参数
 var (
 	db       *sqlx.DB
+	tdLog    *sqlx.DB
 	td       *sqlx.DB
 	reportDb *sqlx.DB
 	tiDb     *sqlx.DB
@@ -71,8 +72,10 @@ func Parse(endpoints []string, path, usernames string) {
 	// 初始化redis
 	cli = conn.InitRedisCluster(conf.Redis.Addr, conf.Redis.Password)
 	// 初始化td
-	td = conn.InitTD(conf.Td.Log.Addr, conf.Td.Log.MaxIdleConn, conf.Td.Log.MaxOpenConn)
-	common.InitTD(td)
+	td = conn.InitTD(conf.Td.Message.Addr, conf.Td.Message.MaxIdleConn, conf.Td.Message.MaxOpenConn)
+	// 初始化td
+	tdLog = conn.InitTD(conf.Td.Log.Addr, conf.Td.Log.MaxIdleConn, conf.Td.Log.MaxOpenConn)
+	common.InitTD(tdLog)
 
 	var names []string
 	if usernames == "repair" {
